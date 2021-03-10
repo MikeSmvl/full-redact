@@ -8,12 +8,20 @@ const traverse = require('traverse');
  *	Optional. The string used when censoring values.
  * @param {Array<string>} secrets
  * 	The array of strings representing the secrets to redact.
+ * @param {boolean=} inPlace
+ *  Optional. Will update the object in place when set to true.
  */
-module.exports = function ({ censor = '[REDACTED]', secrets }) {
-	return {
-		map: map,
-		forEach: forEach,
-	};
+module.exports = function ({
+	censor = '[REDACTED]',
+	secrets,
+	inPlace = false,
+}) {
+	if (!secrets || !secrets.length) {
+		throw Error(
+			"full-redact - Please provide secrets when initializing. Example: ['password', 'authorization', 'apiKey']"
+		);
+	}
+	return inPlace ? forEach : map;
 
 	/**
 	 * Returns a copy of the object redacted.
@@ -23,7 +31,8 @@ module.exports = function ({ censor = '[REDACTED]', secrets }) {
 	 */
 	function map(obj) {
 		return traverse(obj).map(function (_) {
-			if (secrets.includes(this.key)) this.update(censor);
+			if (secrets && secrets.length && secrets.includes(this.key))
+				this.update(censor);
 		});
 	}
 

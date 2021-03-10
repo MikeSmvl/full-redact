@@ -1,0 +1,29 @@
+{
+	"name": "full-redact",
+	"version": "1.0.0",
+	"description": "Fully redact all occurrences of specified secrets in an object.",
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha ./test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MikeSmvl/full-redact.git"
+	},
+	"keywords": [
+		"censor",
+		"redact"
+	],
+	"author": "Mikael Samvelian",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/MikeSmvl/full-redact/issues"
+	},
+	"homepage": "https://github.com/MikeSmvl/full-redact#readme",
+	"devDependencies": {
+		"mocha": "^8.3.1"
+	},
+	"dependencies": {
+		"traverse": "^0.6.6"
+	}
+}
